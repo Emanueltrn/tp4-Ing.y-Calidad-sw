@@ -1,1 +1,0 @@
-import{P as e,f as t,m as n}from"../chunks/5F78g4gG.js";import"../chunks/xihTtKlq.js";var r=n(`<h1>AgendaYA</h1> <p>Proyecto base para M02 - Gestión de Disponibilidad</p>`,1);function i(n){var i=r();e(2),t(n,i)}export{i as component};
