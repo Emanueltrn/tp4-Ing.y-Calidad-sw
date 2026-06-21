@@ -5,7 +5,7 @@ export default defineConfig({
     environment: "node",
 
     include: [
-      "src/test//*/*.test.ts"
+      "src/test/**/*.test.ts"
     ],
 
     coverage: {
