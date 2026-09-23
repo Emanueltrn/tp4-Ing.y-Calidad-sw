@@ -1,16 +1,26 @@
 import { describe, expect, it } from "vitest";
 import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad";
+import { Intervalo } from "../../domain/intervalo/Intervalo";
 
 describe("US09 - Eliminar intervalo existente", () => {
 
   it("elimina lógicamente un intervalo previamente configurado", () => {
 
     /// -arrange
-    const disponibilidad = new DiaDisponibilidad();
+    const usuarioId = "admin-test-001";
+    const fecha = new Date("2026-06-01");
+    const dia = new DiaDisponibilidad("dia-test-001",usuarioId,fecha);
 
-    const intervalo = disponibilidad.crearIntervalo();
+    const intervalo = new Intervalo(
+      "intervalo-test-001",
+      null,
+      null,
+      null
+    );
 
-    disponibilidad.configurarIntervalo(
+    dia.agregarIntervalo(intervalo);
+
+    dia.configurarIntervalo(
       intervalo.id,
       new Date("2026-06-01T09:00:00"),
       new Date("2026-06-01T12:00:00"),
@@ -18,11 +28,11 @@ describe("US09 - Eliminar intervalo existente", () => {
     );
 
     /// -act
-    disponibilidad.eliminarIntervalo(intervalo.id);
+    dia.eliminarIntervalo(intervalo.id);
 
     /// -assert
     expect(intervalo.fechaBaja).not.toBeNull();
-    expect(disponibilidad.obtenerIntervalos()).toHaveLength(0);
+    expect(dia.obtenerIntervalos()).toHaveLength(0);
 
   });
 

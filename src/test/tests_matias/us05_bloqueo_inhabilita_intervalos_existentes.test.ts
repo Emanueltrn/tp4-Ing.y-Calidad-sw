@@ -1,16 +1,33 @@
 ﻿import { describe, expect, it } from "vitest";
 import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad";
 import { DiaEstado } from "../../domain/disponibilidad/DiaEstado";
+import { Intervalo } from "../../domain/intervalo/Intervalo";
 
 describe("US05 - Bloqueo inhabilita intervalos existentes", () => {
 
   it("mantiene los intervalos configurados y deja el día bloqueado", () => {
 
     /// -arrange
-    const dia = new DiaDisponibilidad();
+    const usuarioId = "admin-test-001";
+    const fecha = new Date("2026-06-01");
+    const dia = new DiaDisponibilidad("dia-test-001",usuarioId,fecha);
 
-    const intervalo1 = dia.crearIntervalo();
-    const intervalo2 = dia.crearIntervalo();
+    const intervalo1 = new Intervalo(
+      "intervalo-test-001",
+      null,
+      null,
+      null
+    );
+
+    const intervalo2 = new Intervalo(
+      "intervalo-test-002",
+      null,
+      null,
+      null
+    );
+
+    dia.agregarIntervalo(intervalo1);
+    dia.agregarIntervalo(intervalo2);
 
     dia.configurarIntervalo(
       intervalo1.id,

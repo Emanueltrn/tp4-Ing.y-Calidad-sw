@@ -1,15 +1,25 @@
 import { describe, expect, it } from "vitest";
 import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad";
 import { DiaEstado } from "../../domain/disponibilidad/DiaEstado";
+import { Intervalo } from "../../domain/intervalo/Intervalo";
 
 describe("US05 - Bloqueo de día", () => {
 
   it("retorna BLOQUEADO cuando el día fue bloqueado manualmente", () => {
 
     /// -arrange
-    const dia = new DiaDisponibilidad();
+    const usuarioId = "admin-test-001";
+    const fecha = new Date("2026-06-01");
+    const dia = new DiaDisponibilidad("dia-test-001",usuarioId,fecha);
 
-    const intervalo = dia.crearIntervalo();
+  const intervalo = new Intervalo(
+    "intervalo-test-001",
+    null,
+    null,
+    null
+  );
+
+  dia.agregarIntervalo(intervalo);
 
     dia.configurarIntervalo(
       intervalo.id,

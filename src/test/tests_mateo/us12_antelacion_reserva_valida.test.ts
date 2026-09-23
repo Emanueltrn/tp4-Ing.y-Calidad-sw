@@ -8,7 +8,8 @@ describe("US12 - Antelación de reserva válida", () => {
   it("Si se coloca un numero de antelación positivo, debe aceptarse", () => {
 
     /// -arrange
-    const preferencias = new PreferenciasReuniones();
+    const usuarioId = "admin-test-001";
+    const preferencias = new PreferenciasReuniones(usuarioId);
 
     const antelacion = new AntelacionMinima(4, UnidadAntelacion.HORAS);
 

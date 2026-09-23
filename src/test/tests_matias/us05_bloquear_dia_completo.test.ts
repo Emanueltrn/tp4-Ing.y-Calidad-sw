@@ -7,7 +7,9 @@ describe("US05 - Bloquear día completo", () => {
   it("retorna BLOQUEADO cuando el día fue bloqueado", () => {
 
     /// -arrange
-    const dia = new DiaDisponibilidad();
+    const usuarioId = "admin-test-001";
+    const fecha = new Date("2026-06-01");
+    const dia = new DiaDisponibilidad("dia-test-001",usuarioId,fecha);
 
     /// -act
     dia.bloquear();

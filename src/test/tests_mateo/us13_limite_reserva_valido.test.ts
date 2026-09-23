@@ -7,7 +7,8 @@ describe("US13 - Limite de reservas diarias válido", () => {
   it("Guarda un límite diario válido", () => {
 
     /// -arrange
-    const preferencias = new PreferenciasReuniones();
+    const usuarioId = "admin-test-001";
+    const preferencias = new PreferenciasReuniones(usuarioId);
 
     const limite = new LimiteReservasDiarias(5);
 

@@ -3,50 +3,36 @@ import { DiaEstado } from "./DiaEstado";
 
 export class DiaDisponibilidad {
   private intervalos: Intervalo[] = [];
-  private siguienteId = 1;
+  // private siguienteId = 1;
   private bloqueado = false;
 
-crearIntervalo(): Intervalo {
+  constructor(
+    public readonly id: string,
+    public readonly usuarioId: string,
+    public readonly fecha: Date
+  ) {}
 
-  const intervalo = new Intervalo(
-    String(this.siguienteId++),
-    null,
-    null,
-    null
-  );
-
-  this.intervalos.push(intervalo);
-
-  return intervalo;
-}
-
-configurarIntervalo(
-  id: string,
-  horaInicio: Date,
-  horaFin: Date,
-  tipo: TipoIntervalo
-): void {
-
-  const intervalo = this.intervalos.find(
-    (i) => i.id === id
-  );
-
-  if (!intervalo) {
-    throw new Error("Intervalo inexistente");
+  agregarIntervalo(intervalo: Intervalo): void {
+    this.intervalos.push(intervalo);
   }
 
-  intervalo.configurar(
-    horaInicio,
-    horaFin,
-    tipo
-  );
-}
+  configurarIntervalo(
+    id: string,
+    horaInicio: Date,
+    horaFin: Date,
+    tipo: TipoIntervalo
+  ): void {
+    const intervalo = this.intervalos.find((i) => i.id === id);
+
+    if (!intervalo) {
+      throw new Error("Intervalo inexistente");
+    }
+
+    intervalo.configurar(horaInicio, horaFin, tipo);
+  }
 
   eliminarIntervalo(id: string): void {
-
-    const intervalo = this.intervalos.find(
-      (i) => i.id === id
-    );
+    const intervalo = this.intervalos.find((i) => i.id === id);
 
     if (!intervalo) {
       throw new Error("Intervalo inexistente");
@@ -56,29 +42,25 @@ configurarIntervalo(
   }
 
   obtenerIntervalos(): Intervalo[] {
-
-    return this.intervalos.filter(
-      (i) => i.intervaloActivo()
-    );
+    return this.intervalos.filter((i) => i.intervaloActivo());
   }
 
   bloquear(): void {
-       this.bloqueado = true;
+    this.bloqueado = true;
   }
 
   desbloquear(): void {
-       this.bloqueado = false;
+    this.bloqueado = false;
   }
 
   obtenerEstado(): DiaEstado {
-
     if (this.bloqueado) {
-      return DiaEstado.BLOQUEADO;;
+      return DiaEstado.BLOQUEADO;
     }
 
     const tieneIntervalosConfigurados =
       this.intervalos.some(
-          (i) =>
+        (i) =>
           i.intervaloActivo() &&
           i.horaInicio !== null &&
           i.horaFin !== null &&
@@ -89,7 +71,6 @@ configurarIntervalo(
       return DiaEstado.HORARIO_ASIGNADO;
     }
 
-    return DiaEstado.SIN_ASIGNAR;;
+    return DiaEstado.SIN_ASIGNAR;
   }
 }
-
