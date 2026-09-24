@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
+﻿import { describe, expect, it } from "vitest";
 import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad";
 import { DiaEstado } from "../../domain/disponibilidad/DiaEstado";
 
-describe("US03 - Estado del Día", () => {
+describe("US06 - Bloquear día completo", () => {
 
-  it("retorna SIN_ASIGNAR cuando no existen intervalos", () => {
+  it("retorna BLOQUEADO cuando el día fue bloqueado", () => {
 
     /// -arrange
     const usuarioId = "admin-test-001";
@@ -12,10 +12,11 @@ describe("US03 - Estado del Día", () => {
     const dia = new DiaDisponibilidad("dia-test-001",usuarioId,fecha);
 
     /// -act
+    dia.bloquear();
     const estado = dia.obtenerEstado();
 
     /// -assert
-    expect(estado).toBe(DiaEstado.SIN_ASIGNAR);
+    expect(estado).toBe(DiaEstado.BLOQUEADO);
   });
 
 });

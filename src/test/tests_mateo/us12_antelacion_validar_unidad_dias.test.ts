@@ -3,23 +3,24 @@ import { AntelacionMinima } from "../../domain/preferencias/AntelacionMinima";
 import { UnidadAntelacion } from "../../domain/preferencias/UnidadAntelacion";
 import { PreferenciasReuniones } from "../../domain/preferencias/PreferenciaReuniones";
 
-describe("US12 - Antelación de reserva válida", () => {
+describe("US_ADM_012 - Tiempo mínimo de antelación para reservas", () => {
 
-  it("Si se coloca un numero de antelación positivo, debe aceptarse", () => {
+  it("configura la antelación en días y conserva la unidad DIAS", () => {
 
     /// -arrange
     const usuarioId = "admin-test-001";
     const preferencias = new PreferenciasReuniones(usuarioId);
-    const antelacion = new AntelacionMinima(4, UnidadAntelacion.HORAS);
+    const antelacion = new AntelacionMinima(
+      2,
+      UnidadAntelacion.DIAS
+    );
 
     /// -act
     preferencias.guardarAntelacionMinima(antelacion);
     const resultado = preferencias.obtenerAntelacionMinima();
 
     /// -assert
-    expect(resultado?.valor).toBe(4);
-    expect(resultado?.unidad).toBe(UnidadAntelacion.HORAS);
+    expect(resultado?.unidad).toBe(UnidadAntelacion.DIAS);
 
   });
-
 });

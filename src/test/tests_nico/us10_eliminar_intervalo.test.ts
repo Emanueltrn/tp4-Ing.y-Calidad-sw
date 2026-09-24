@@ -2,18 +2,14 @@ import { describe, expect, it } from "vitest";
 import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad";
 import { Intervalo } from "../../domain/intervalo/Intervalo";
 
-describe("US06 - Crear intervalo laboral válido", () => {
+describe("US10 - Eliminar intervalo existente", () => {
 
-  it("configura correctamente un intervalo cuando fecha_inicio < fecha_fin", () => {
+  it("elimina lógicamente un intervalo previamente configurado", () => {
 
     /// -arrange
     const usuarioId = "admin-test-001";
     const fecha = new Date("2026-06-01");
     const dia = new DiaDisponibilidad("dia-test-001",usuarioId,fecha);
-
-    const fechaH_inicio = new Date("2026-06-01T09:00:00");
-
-    const fechaH_fin = new Date("2026-06-01T12:00:00");
 
     const intervalo = new Intervalo(
       "intervalo-test-001",
@@ -24,22 +20,20 @@ describe("US06 - Crear intervalo laboral válido", () => {
 
     dia.agregarIntervalo(intervalo);
 
-    /// -act
     dia.configurarIntervalo(
       intervalo.id,
-      fechaH_inicio,
-      fechaH_fin,
+      new Date("2026-06-01T09:00:00"),
+      new Date("2026-06-01T12:00:00"),
       "LABORAL"
     );
 
+    /// -act
+    dia.eliminarIntervalo(intervalo.id);
+
     /// -assert
-    expect(intervalo.horaInicio).toEqual(fechaH_inicio);
+    expect(intervalo.fechaBaja).not.toBeNull();
+    expect(dia.obtenerIntervalos()).toHaveLength(0);
 
-    expect(intervalo.horaFin).toEqual(fechaH_fin);
-
-    expect(intervalo.tipo).toBe("LABORAL");
-
-    expect(dia.obtenerIntervalos()).toHaveLength(1);
   });
 
 });

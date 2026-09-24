@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad";
 import { Intervalo } from "../../domain/intervalo/Intervalo";
 
-describe("US06 - Rechazar intervalo inválido", () => {
+describe("US07 - Rechazar intervalo inválido", () => {
 
   it("lanza error cuando fecha_inicio es mayor que fecha_fin", () => {
 

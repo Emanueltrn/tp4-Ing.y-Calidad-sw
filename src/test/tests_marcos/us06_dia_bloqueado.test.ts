@@ -3,9 +3,9 @@ import { DiaDisponibilidad } from "../../domain/disponibilidad/DiaDisponibilidad
 import { DiaEstado } from "../../domain/disponibilidad/DiaEstado";
 import { Intervalo } from "../../domain/intervalo/Intervalo";
 
-describe("US05 - Bloqueo de día", () => {
+describe("US06 - Bloqueo de día", () => {
 
-  it("retorna BLOQUEADO cuando el día fue bloqueado manualmente", () => {
+  it("retorna BLOQUEADO cuando el día fue bloqueado manualmente y el dia posee un intervalo configurado", () => {
 
     /// -arrange
     const usuarioId = "admin-test-001";
