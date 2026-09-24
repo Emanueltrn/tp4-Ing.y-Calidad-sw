@@ -8,6 +8,7 @@ node_modules
 .wrangler
 /.svelte-kit
 /build
+/coverage
 
 # OS
 .DS_Store
@@ -27,3 +28,7 @@ test-results
 
 #IDEs
 .idea/
+
+# Ply & Test Results
+/ply/
+/results/ 
