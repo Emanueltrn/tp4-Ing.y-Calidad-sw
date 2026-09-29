@@ -1,23 +1,28 @@
 import { describe, expect, it } from "vitest";
+
 import { PreferenciasReuniones } from "../../domain/preferencias/PreferenciaReuniones";
 import { LimiteReservasDiarias } from "../../domain/preferencias/LimiteReservasDiarias";
 
-describe("US13 - Limite de reservas diarias válido", () => {
+describe("US_ADM_013 - Límite de reservas por día", () => {
 
-  it("Guarda un límite diario válido", () => {
+  it("no guarda un límite diario inválido", () => {
 
     /// -arrange
     const usuarioId = "admin-test-001";
     const preferencias = new PreferenciasReuniones(usuarioId);
-    const limite = new LimiteReservasDiarias(5);
 
     /// -act
-    preferencias.guardarLimiteReservasDiarias(limite);
+    try {
+      const limite = new LimiteReservasDiarias(0);
+      preferencias.guardarLimiteReservasDiarias(limite);
+    } catch {
+      // se espera que el límite inválido sea rechazado.
+    }
+
     const resultado = preferencias.obtenerLimiteReservasDiarias();
 
     /// -assert
-    expect(resultado).not.toBeNull();
-    expect(resultado?.cantidad).toBe(5);
+    expect(resultado).toBeNull();
   });
 
 });
