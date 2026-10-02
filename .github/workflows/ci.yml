@@ -26,10 +26,10 @@ jobs:
         run: npm ci
 
       - name: Verificar formato
-        run: npx prettier --check . || echo "Omitiendo si Prettier no está configurado"
+        run: npx prettier --check . || echo "omitir si Prettier no está configurado"
 
       - name: Verificar linter
-        run: npm run lint || echo "Omitiendo si ESLint no es restrictivo"
+        run: npm run lint || echo "omitir si ESLint no es restrictivo"
 
       - name: Ejecutar Pruebas Unitarias
         run: npm run test
