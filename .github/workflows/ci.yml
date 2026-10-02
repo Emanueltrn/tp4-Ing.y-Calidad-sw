@@ -54,5 +54,5 @@ jobs:
     environment:
       name: production # activa la aprobación manual en GitHub
     steps:
-      - name: 🚀 Disparar Deploy a Producción
+      - name: Deploy
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_PROD }}
