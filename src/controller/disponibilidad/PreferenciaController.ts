@@ -2,6 +2,7 @@ import { PreferenciaService } from "../../service/disponibilidad/PreferenciaServ
 import { UnidadAntelacion } from "../../domain/preferencias/UnidadAntelacion";
 import type { AntelacionMinimaDTO } from "../../dto/preferencias/AntelacionMinimaDTO";
 import type { LimiteReservasDiariasDTO } from "../../dto/preferencias/LimiteReservasDiariasDTO";
+import type { DiasHabilitadosRecord } from "../../repository/disponibilidad/PreferenciaRepository";
 
 export class PreferenciaController {
   constructor(
@@ -74,5 +75,23 @@ export class PreferenciaController {
         usuarioId,
         cantidad
     );
+    }
+
+    async obtenerDiasHabilitados(
+      usuarioId: string
+        ) {
+          return this.preferenciaService.obtenerDiasHabilitados(
+            usuarioId
+          );
+        }
+
+    async guardarDiasHabilitados(
+      usuarioId: string,
+      diasHabilitados: DiasHabilitadosRecord
+    ): Promise<void> {
+      return this.preferenciaService.guardarDiasHabilitados(
+        usuarioId,
+        diasHabilitados
+      );
     }
 }
